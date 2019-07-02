@@ -1,0 +1,26 @@
+<ion-view title="TAB3">
+	<!-- 日历显示 -->
+	<div class="row row-wrap" style="background-color: #FFFFFF;position: absolute;top: 0;z-index: 99;">
+		<div style="width: 100%;text-align: right;margin-bottom: 6px;">
+			<button style="border: none;padding: 6px 18px;background-color: #387EF5;" ng-click="vc.confirmChoose()">确定</button>
+		</div>
+		<div style="width: 14.2%;text-align: center;">日</div>
+		<div style="width: 14.2%;text-align: center;">一</div>
+		<div style="width: 14.2%;text-align: center;">二</div>
+		<div style="width: 14.2%;text-align: center;">三</div>
+		<div style="width: 14.2%;text-align: center;">四</div>
+		<div style="width: 14.2%;text-align: center;">五</div>
+		<div style="width: 14.2%;text-align: center;">六</div>
+	</div>
+	<ion-content>
+		<table class="tab2-table-cleander">
+			<tr class="row row-wrap" ng-repeat="monthItem in vo.dateData" ng-style="{'margin-top':$index==0?'72px':'0px'}">
+				<td style="width: 100%;margin-top: 12px;">{{monthItem.year + '年' + monthItem.month+'月'}}</td>
+				<td ng-repeat="dayItem in monthItem.dayList track by $index" ng-style="vc.setChooseTimeStyle(dayItem)" ng-click="vc.chooseTime(dayItem)">
+					<i>{{dayItem.day}}</i><br />
+					<i ng-style="{'color':(dayItem.isHoliday)?'green':'#000000', 'font-size': '10px'}">{{vc.showHoliday(dayItem)}}</i>
+				</td>
+			</tr>
+		</table>
+	</ion-content>
+</ion-view>

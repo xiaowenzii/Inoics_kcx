@@ -1,0 +1,11 @@
+<ion-view title="消息">
+	<ion-content>
+		<div class="list">
+			<a class="item item-avatar" ng-repeat="item in vo.msgList" ng-click="vc.goChartroom(item)">
+				<img ng-src="{{item.headImg}}">
+				<h2>{{item.nickName}}</h2>
+				<p>{{item.msg}}</p>
+			</a>
+		</div>
+	</ion-content>
+</ion-view>

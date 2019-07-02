@@ -1,0 +1,126 @@
+<ion-view>
+	<ion-header-bar align-title="left" class="bar-positive">
+		<div class="buttons">
+			<button class="button" ng-click="vc.goBack()">
+				<img src="img/backward.png" style="height: 36px;width: 36px">
+			</button>
+		</div>
+	</ion-header-bar>
+	<ion-content>
+		<div style="height: 86%;overflow: hidden;">
+			<div id="screen">
+				<div ng-repeat="item in vo.chartList">
+					<div style="width: 100%;" class="other-side" ng-if="item.user!='004'">
+						<div style="width: 100%; text-align: center;height: 24px;">{{item.msgTime}}</div>
+						<div class="header" style="float: left;">
+							<img ng-src="{{item.headImg}}" style="height: 36px;width: 36px;border-radius: 6px;" />
+						</div>
+						<div class="left-send">
+							<div class="left-arrow"></div>
+							<div class="left-text">
+								{{item.msg}}
+							</div>
+						</div>
+					</div>
+					<div style="width: 100%;" class="myself" ng-if="item.user=='004'">
+						<div style="width: 100%; text-align: center;height: 24px;">{{item.msgTime}}</div>
+						<div class="header" style="float: right;">
+							<img ng-src="{{item.headImg}}" style="height: 36px;width: 36px;border-radius: 6px;" />
+						</div>
+						<div class="right-send">
+							<div class="right-arrow"></div>
+							<div class="right-text">
+								{{item.msg}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
+<style type="text/css">
+	#screen {
+		margin: 6px;
+		height: 100%;
+		background-color: rgba(255, 255, 255, 0.5);
+        overflow-y: scroll;
+	}
+
+	#screen [class$="send"] {
+		width: 60%;
+		position: relative;
+	}
+
+	#screen [class$="arrow"] {
+		border: 8px solid transparent;
+		position: absolute;
+		top: 10px;
+		z-index: 99;
+	}
+
+	#screen .other-side {
+		margin: 6px auto;
+		overflow: -webkit-paged-x;
+		float: left;
+	}
+
+	#screen .other-side .left-send {
+		float: left;
+	}
+
+	#screen .other-side .left-send .left-arrow {
+		border-right-color: rgb(172, 218, 71);
+		left: 4px;
+	}
+
+	#screen .other-side .left-send .left-text {
+		padding: 9px;
+		font-family: "楷体";
+		background: rgb(172, 218, 71);
+		border-radius: 6px;
+		box-sizing: border-box;
+		position: absolute;
+		left: 20px;
+	}
+
+	#screen .myself {
+		margin: 6px auto;
+		overflow: -webkit-paged-x;
+		float: right;
+	}
+
+	#screen .myself .right-send {
+		float: right;
+	}
+
+	#screen .myself .right-send .right-arrow {
+		border-left-color: rgb(172, 218, 71);
+		right: 4px;
+	}
+
+	#screen .myself .right-send .right-text {
+		padding: 9px;
+		font-family: "楷体";
+		background: rgb(172, 218, 71);
+		border-radius: 6px;
+		box-sizing: border-box;
+		position: absolute;
+		right: 20px;
+	}
+
+	/*滚动条*/
+	#screen::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	#screen::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+		border-radius: 12px;
+	}
+
+	#screen::-webkit-scrollbar-thumb {
+		background-color: rgba(75, 180, 225, 1);
+		border-radius: 12px;
+	}
+</style>

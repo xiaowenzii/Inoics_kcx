@@ -1,0 +1,29 @@
+<ion-view title="TAB2">
+	<ion-content>
+		<!-- 下拉单选,多选,级联单选多选指令插件 -->
+		<div search-header aaa="vo.aaa" item1="vo.itemI" item2="vo.itemII" hideitem="vo.hideItem" province="vo.province" city="vo.city"
+		 cityjx="vo.cityJx" cityhb="vo.cityHb" level="vo.level" classify="vo.classify" moretype="vo.moreType" morecon="vo.moreCon"
+		 moretuition="vo.moreTuition" morepersonnum="vo.morePersonNum"></div>
+
+		<!-- 时间指令插件 -->
+		<div class="row" style="text-align: center; border-top: 0px;border-bottom: 0.5px solid #EFEFEF;border-left: 0px;border-right: 0px;height: auto;margin-top: 12px;">
+			<div class="col col-33" style="text-align: center;border: 1px solid #EFEFEF;">
+				<label style="display: block;padding-top: 6px;font-size: 16px;">时间</label>
+			</div>
+			<div class="col col-66" style="text-align: center;border: 1px solid #EFEFEF;">
+				<input input-datetime format="yyyy-MM-dd" type="text" style="width: auto;border: 0px;text-align: center;font-size: 16px;background-color: #00000000"
+				 ng-model="vo.sj" max="vo.maxtime" placeholder="请选择时间" readonly="true">
+			</div>
+		</div>
+
+		<!-- 数据库操作按钮 -->
+		<div class="row row-wrap" style="padding: 0;margin-top: 24px;text-align: center;">
+			<div class="col-50">
+				<button class="button button-positive" style="width: 80%;" ng-click="vc.save()">保存</button>
+			</div>
+			<div class="col-50">
+				<button class="button button-positive" style="width: 80%;" ng-click="vc.search()">查询</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
