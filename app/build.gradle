@@ -191,10 +191,10 @@ android {
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         if (variant.buildType.name.equals('release')) {
                             //如果是release包
-                            fileName = "nowns_${createTime}_release.apk"
+                            fileName = "ionics_${createTime}_release.apk"
                         } else if (variant.buildType.name.equals('debug')) {
                             //如果是debug包
-                            fileName = "nowns_${createTime}_debug.apk"
+                            fileName = "ionics_${createTime}_debug.apk"
                         }
                         outputFileName = fileName
                     }
