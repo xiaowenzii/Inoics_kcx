@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/CordovaLib/CordovaLib.iml" filepath="$PROJECT_DIR$/CordovaLib/CordovaLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/Inoics_kcx.iml" filepath="$PROJECT_DIR$/Inoics_kcx.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/identify/identify.iml" filepath="$PROJECT_DIR$/identify/identify.iml" />
     </modules>
   </component>
 </project>

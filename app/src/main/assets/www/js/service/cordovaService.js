@@ -76,6 +76,18 @@ angular.module('train.cordova.services', [])
 				}, function(msg) {
 					console.log("onError() msg : " + msg);
 				});
+			},
+			
+			/**
+			 * 数据库操作
+			 * operateType: 操作类型:增'save', 删'delete', 改'update', 查'search'
+			 */
+			idcardScan: function(side){
+				Idcard.Idcard(side, '', function(data) {
+					console.log("onSuccess() data : " + data);
+				}, function(msg) {
+					console.log("onError() msg : " + msg);
+				});
 			}
 		};
 		return cordovaUtils;

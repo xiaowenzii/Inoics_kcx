@@ -113,7 +113,7 @@ angular.module('train.controllers', [
 	})
 
 	.controller('tab3Ctrl', function($rootScope, $scope, $state, $ionicHistory, $ionicLoading, $ionicScrollDelegate,
-		$ionicPopup, $timeout, formatService, stateService) {
+		$ionicPopup, $timeout, formatService, stateService, cordovaService) {
 		$scope.vo = {
 			maxtime: '2030.12.12',
 			startTime: formatService.formatDate(new Date()),
@@ -124,6 +124,22 @@ angular.module('train.controllers', [
 			//选择时间
 			chooseTime: function() {
 				stateService.chooseTime($scope.vo.startTime, $scope.vo.endTime);
+			},
+			//身份证正面识别
+			front: function(){
+				if (iscordova) {
+					cordovaService.idcardScan("front");
+				} else {
+					ionicService.toast("非移动端操作", 1000);
+				}
+			},
+			//身份证反面识别
+			back: function(){
+				if (iscordova) {
+					cordovaService.idcardScan("back");
+				} else {
+					ionicService.toast("非移动端操作", 1000);
+				}
 			}
 		}
 

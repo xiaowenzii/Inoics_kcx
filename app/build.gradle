@@ -284,6 +284,12 @@ android {
     if (cdvDebugSigningPropertiesFile) {
         addSigningProps(cdvDebugSigningPropertiesFile, signingConfigs.debug)
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 /*
@@ -294,9 +300,13 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
-    implementation(project(path: ":CordovaLib"))
+    implementation(project(path: ':CordovaLib'))
     compile "com.android.support:support-v4:24.1.1+"
     // SUB-PROJECT DEPENDENCIES END
+
+    compile files('libs/ocr-sdk.jar')
+    compile project(path: ':identify')
+    compile 'com.kymjs.rxvolley:rxvolley:1.1.4'
 }
 
 def promptForReleaseKeyPassword() {

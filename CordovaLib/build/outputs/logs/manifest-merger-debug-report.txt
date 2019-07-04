@@ -1,27 +1,27 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:20:1-23:12
-INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:20:1-23:12
-INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:20:1-23:12
-INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:20:1-23:12
-INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:20:1-23:12
-INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:20:1-23:12
-INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:20:1-23:12
+ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:19:1-25:12
+INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:19:1-25:12
+INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:19:1-25:12
+INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:19:1-25:12
+INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:19:1-25:12
+INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:19:1-25:12
+INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:19:1-25:12
 	package
-		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:21:7-35
+		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:20:5-33
 		INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml
 		INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml
 	android:versionName
-		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:21:36-61
+		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:22:5-30
 		INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml
 		INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:20:11-69
+		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:19:11-69
 	android:versionCode
-		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:21:62-85
+		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:21:5-28
 		INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml
 		INJECTED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml
 uses-sdk
-ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:22:5-44
+ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:24:5-44
 	android:minSdkVersion
-		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:22:15-41
+		ADDED from D:\Android\AndroidStudio\Project\Inoics_kcx\CordovaLib\AndroidManifest.xml:24:15-41

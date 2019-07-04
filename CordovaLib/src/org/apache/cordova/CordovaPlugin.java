@@ -43,6 +43,14 @@ public class CordovaPlugin {
     public CordovaInterface cordova;
     protected CordovaPreferences preferences;
     private String serviceName;
+    private static CordovaPlugin cordovaPlugin;
+
+    public static CordovaPlugin getInstance() {
+        if (cordovaPlugin==null){
+            cordovaPlugin = new CordovaPlugin();
+        }
+        return cordovaPlugin;
+    }
 
     /**
      * Call this after constructing to initialize the plugin.
