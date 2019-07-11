@@ -1,6 +1,8 @@
 package com.xiaowenzi.idcard;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,12 +18,13 @@ import com.baidu.ocr.sdk.model.IDCardParams;
 import com.baidu.ocr.sdk.model.IDCardResult;
 import com.baidu.ocr.ui.camera.CameraActivity;
 import com.xiaowenzi.app.HBaseApp;
-import com.xiaowenzi.app.SqlApp;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.PermissionHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 
@@ -30,35 +33,40 @@ import java.io.File;
  * 2019/2/27
  */
 public class IdcardPlugin extends CordovaPlugin {
-
+    public static String[] permissions = {
+            Manifest.permission.CAMERA
+    };
     private static final int REQUEST_CODE_CAMERA = 102;
+    public CallbackContext callbackContext;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        initAccessTokenWithAkSk(action);
-        return true;
+        this.callbackContext = callbackContext;
+
+        if (!this.hasPermissions()) {
+            PermissionHelper.requestPermissions(this, 0, IdcardPlugin.permissions);
+            return true;
+        } else {
+            //初始化
+            return initAccessTokenWithAkSk(action, args, callbackContext, (CordovaPlugin) this);
+        }
     }
 
-    private void initAccessTokenWithAkSk(String side) {
+    private boolean initAccessTokenWithAkSk(String side, JSONArray args, CallbackContext callbackContext, CordovaPlugin cordovaPlugin) {
         OCR.getInstance().initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
             @Override
             public void onResult(AccessToken accessToken) {
-                new Thread(new Runnable() {
+                HBaseApp.post2UIRunnable(new Runnable() {
                     @Override
                     public void run() {
+                        Intent intent = new Intent(cordova.getActivity(), CameraActivity.class);
+                        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, DataFileUtil.getSaveFile(cordova.getActivity()).getAbsolutePath());
                         if (side.equals(IDCardParams.ID_CARD_SIDE_FRONT)) {
-                            Intent intent = new Intent(SqlApp.getInstance(), CameraActivity.class);
-                            intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                                    DataFileUtil.getSaveFile(SqlApp.getInstance()).getAbsolutePath());
                             intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
-                            cordova.startActivityForResult(CordovaPlugin.getInstance(), intent, REQUEST_CODE_CAMERA);
                         } else {
-                            Intent intent = new Intent(SqlApp.getInstance(), CameraActivity.class);
-                            intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                                    DataFileUtil.getSaveFile(SqlApp.getInstance()).getAbsolutePath());
                             intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_BACK);
-                            cordova.startActivityForResult(CordovaPlugin.getInstance(), intent, REQUEST_CODE_CAMERA);
                         }
+                        cordova.startActivityForResult(cordovaPlugin, intent, REQUEST_CODE_CAMERA);
                     }
                 });
             }
@@ -69,18 +77,20 @@ public class IdcardPlugin extends CordovaPlugin {
                 HBaseApp.post2UIRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(SqlApp.getInstance(), "初始化认证失败,请检查 key", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(cordova.getActivity(), "初始化认证失败,请检查 key", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
-        }, SqlApp.getInstance(), "dfoi5inVLZ6KYrG36LdhyZ2O", "tXgIAkY7s2CaMPEaEIcUfaQs86yNTGcQ");
+        }, cordova.getActivity(), "5huvRjYS4OfG4QdfVsazqf3S", "xzNhGktP7XNRGVSP0AaVKK1saxgelp5M");
+
+        return true;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
             if (intent != null) {
                 String contentType = intent.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
-                String filePath = DataFileUtil.getSaveFile(SqlApp.getInstance()).getAbsolutePath();
+                String filePath = DataFileUtil.getSaveFile(cordova.getActivity()).getAbsolutePath();
                 if (!TextUtils.isEmpty(contentType)) {
                     if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) {
                         //识别身份证头像面信息
@@ -118,40 +128,43 @@ public class IdcardPlugin extends CordovaPlugin {
             @Override
             public void onResult(IDCardResult idCardResult) {
                 if (idCardResult != null) {
-                    if (idCardSide.equals(IDCardParams.ID_CARD_SIDE_BACK)) {
-                        if (idCardResult.getSignDate() != null) {
-                            Log.e("发证日期", idCardResult.getSignDate().toString());
+                    try {
+                        if (idCardSide.equals(IDCardParams.ID_CARD_SIDE_BACK)) {
+                            JSONObject obj = new JSONObject();
+                            obj.put("signDate", idCardResult.getSignDate());
+                            obj.put("expiryDate", idCardResult.getExpiryDate());
+                            obj.put("issueAuthority", idCardResult.getIssueAuthority());
+
+                            callbackContext.success(obj);
+                        } else {
+                            JSONObject obj = new JSONObject();
+                            obj.put("name", idCardResult.getName());
+                            obj.put("gender", idCardResult.getGender());
+                            obj.put("ethnic", idCardResult.getEthnic());
+                            obj.put("idNumber", idCardResult.getIdNumber());
+                            obj.put("address", idCardResult.getAddress());
+
+                            callbackContext.success(obj);
                         }
-                        if (idCardResult.getExpiryDate() != null) {
-                            Log.e("到期日期", idCardResult.getExpiryDate().toString());
-                        }
-                        if (idCardResult.getIssueAuthority() != null) {
-                            Log.e("签发机关", idCardResult.getIssueAuthority().toString());
-                        }
-                    } else {
-                        if (idCardResult.getName() != null) {
-                            Log.e("姓名", idCardResult.getName().toString());
-                        }
-                        if (idCardResult.getGender() != null) {
-                            Log.e("性别", idCardResult.getGender().toString());
-                        }
-                        if (idCardResult.getEthnic() != null) {
-                            Log.e("民族", idCardResult.getEthnic().toString());
-                        }
-                        if (idCardResult.getIdNumber() != null) {
-                            Log.e("身份证号", idCardResult.getIdNumber().toString());
-                        }
-                        if (idCardResult.getAddress() != null) {
-                            Log.e("家庭住址", idCardResult.getAddress().toString());
-                        }
+                    } catch (JSONException e) {
                     }
                 }
             }
 
             @Override
             public void onError(OCRError ocrError) {
+                callbackContext.error("识别错误");
                 Log.e("", "识别错误");
             }
         });
+    }
+
+    public boolean hasPermissions() {
+        for (String p : permissions) {
+            if (!PermissionHelper.hasPermission(this, p)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

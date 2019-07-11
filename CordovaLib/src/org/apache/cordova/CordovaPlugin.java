@@ -45,13 +45,6 @@ public class CordovaPlugin {
     private String serviceName;
     private static CordovaPlugin cordovaPlugin;
 
-    public static CordovaPlugin getInstance() {
-        if (cordovaPlugin==null){
-            cordovaPlugin = new CordovaPlugin();
-        }
-        return cordovaPlugin;
-    }
-
     /**
      * Call this after constructing to initialize the plugin.
      * Final because we want to be able to change args without breaking plugins.

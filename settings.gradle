@@ -1,5 +1,5 @@
 // GENERATED FILE - DO NOT EDIT
 include ":"
+include ":app"
 include ":CordovaLib"
 include ":identify"
-include ":app"

@@ -79,12 +79,21 @@ angular.module('train.cordova.services', [])
 			},
 			
 			/**
-			 * 数据库操作
-			 * operateType: 操作类型:增'save', 删'delete', 改'update', 查'search'
+			 * 身份证识别
 			 */
 			idcardScan: function(side){
 				Idcard.Idcard(side, '', function(data) {
-					console.log("onSuccess() data : " + data);
+				if(side=='front'){
+				    console.log("name" + data.name);
+				    console.log("gender" + data.gender);
+				    console.log("ethnic" + data.ethnic);
+				    console.log("idNumber" + data.idNumber);
+				    console.log("address" + data.address);
+				}else{
+				    console.log("signDate" + data.signDate);
+				    console.log("expiryDate" + data.expiryDate);
+				    console.log("issueAuthority" + data.issueAuthority);
+				}
 				}, function(msg) {
 					console.log("onError() msg : " + msg);
 				});
